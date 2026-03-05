@@ -99,27 +99,42 @@ st.caption("Isai Abraham Lopez Esquivel")
 ruta_predeterminada = os.path.join(ROOT_DIR, "datos", "dataset_oltp.csv")
 df = None
 
+# if uploaded is not None:
+#     # Caso 1: El usuario subió un archivo manualmente
+#     try:
+#         df = leer_csv(uploaded, sep=sep, encoding=encoding)
+#         st.sidebar.success("✅ Usando archivo cargado manualmente.")
+#     except Exception as e:
+#         st.error(f"Error al leer el archivo subido: {e}")
+#         st.stop()
+# elif os.path.exists(ruta_predeterminada):
+#     # Caso 2: No hay subida manual, pero existe el archivo en el repo
+#     try:
+#         df = pd.read_csv(ruta_predeterminada, sep=sep, encoding=encoding)
+#         st.sidebar.info("ℹ️ Cargado automáticamente desde el repositorio.")
+#     except Exception as e:
+#         st.sidebar.error(f"Error al cargar archivo predeterminado: {e}")
+#         st.stop()
+# else:
+#     # Caso 3: Ni subida ni archivo en repo
+#     st.warning("⚠️ Carga un archivo CSV en la barra lateral para continuar.")
+#     st.stop()
+
+
+
+# Definimos la ruta usando el directorio raíz del proyecto
+ruta_predeterminada = os.path.join(ROOT_DIR, "datos", "dataset_oltp.csv")
+
 if uploaded is not None:
-    # Caso 1: El usuario subió un archivo manualmente
-    try:
-        df = leer_csv(uploaded, sep=sep, encoding=encoding)
-        st.sidebar.success("✅ Usando archivo cargado manualmente.")
-    except Exception as e:
-        st.error(f"Error al leer el archivo subido: {e}")
-        st.stop()
+    df = leer_csv(uploaded, sep=sep, encoding=encoding)
+    st.sidebar.success("✅ Usando archivo cargado manualmente.")
 elif os.path.exists(ruta_predeterminada):
-    # Caso 2: No hay subida manual, pero existe el archivo en el repo
-    try:
-        df = pd.read_csv(ruta_predeterminada, sep=sep, encoding=encoding)
-        st.sidebar.info("ℹ️ Cargado automáticamente desde el repositorio.")
-    except Exception as e:
-        st.sidebar.error(f"Error al cargar archivo predeterminado: {e}")
-        st.stop()
+    # Aquí es donde la nube encontrará el archivo en la carpeta 'datos'
+    df = pd.read_csv(ruta_predeterminada, sep=sep, encoding=encoding)
+    st.sidebar.info("ℹ️ Cargado automáticamente desde el repositorio.")
 else:
-    # Caso 3: Ni subida ni archivo en repo
     st.warning("⚠️ Carga un archivo CSV en la barra lateral para continuar.")
     st.stop()
-
 
 
 
