@@ -403,7 +403,11 @@ if vista == "Entrenamiento":
                 test_size=float(proporcion_prueba),
                 max_iter=int(iteraciones_maximas),
             )
-            ruta_modelo = guardar_modelo(resultado.modelo, "modelos/modelo_mlp.joblib")
+            #ruta_modelo = guardar_modelo(resultado.modelo, "modelos/modelo_mlp.joblib")
+            # --- CAMBIO AQUÍ: Usamos la ruta absoluta ---
+            ruta_destino = os.path.join(ROOT_DIR, "modelos", "modelo_mlp.joblib")
+            ruta_modelo = guardar_modelo(resultado.modelo, ruta_destino)
+            # --------------------------------------------
 
         st.success(f"Modelo guardado en: {ruta_modelo}")
 
