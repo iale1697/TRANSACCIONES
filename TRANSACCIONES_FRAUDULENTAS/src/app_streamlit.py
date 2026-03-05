@@ -81,15 +81,45 @@ st.caption("Isai Abraham Lopez Esquivel")
 # ----------------------------
 # Cargar datos
 # ----------------------------
-if uploaded is None:
-    st.warning("Carga un archivo CSV en la barra lateral para continuar.")
+# if uploaded is None:
+#     st.warning("Carga un archivo CSV en la barra lateral para continuar.")
+#     st.stop()
+
+# try:
+#     df = leer_csv(uploaded, sep=sep, encoding=encoding)
+# except Exception as e:
+#     st.error(f"No pude leer el CSV: {e}")
+#     st.stop()
+
+# ----------------------------
+# Cargar datos (Lógica Híbrida)
+# ----------------------------
+ruta_predeterminada = "datos/dataset_oltp.csv"
+df = None
+
+if uploaded is not None:
+    # Caso 1: El usuario subió un archivo manualmente
+    try:
+        df = leer_csv(uploaded, sep=sep, encoding=encoding)
+        st.sidebar.success("✅ Usando archivo cargado manualmente.")
+    except Exception as e:
+        st.error(f"Error al leer el archivo subido: {e}")
+        st.stop()
+elif os.path.exists(ruta_predeterminada):
+    # Caso 2: No hay subida manual, pero existe el archivo en el repo
+    try:
+        df = pd.read_csv(ruta_predeterminada, sep=sep, encoding=encoding)
+        st.sidebar.info("ℹ️ Cargado automáticamente desde el repositorio.")
+    except Exception as e:
+        st.sidebar.error(f"Error al cargar archivo predeterminado: {e}")
+        st.stop()
+else:
+    # Caso 3: Ni subida ni archivo en repo
+    st.warning("⚠️ Carga un archivo CSV en la barra lateral para continuar.")
     st.stop()
 
-try:
-    df = leer_csv(uploaded, sep=sep, encoding=encoding)
-except Exception as e:
-    st.error(f"No pude leer el CSV: {e}")
-    st.stop()
+
+
 
 # Normalizaciones suaves (solo para visualizar)
 if "canal" in df.columns:
