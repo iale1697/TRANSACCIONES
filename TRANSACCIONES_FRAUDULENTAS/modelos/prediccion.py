@@ -1,12 +1,23 @@
 # modelos/prediccion.py
 from __future__ import annotations
-
 from typing import Any, Dict, Union
 import pandas as pd
 import joblib
+import os  # <--- Agregamos esta librería
 
-
-def cargar_modelo(ruta: str = "modelos/modelo_mlp.joblib"):
+# def cargar_modelo(ruta: str = "modelos/modelo_mlp.joblib"):
+#     return joblib.load(ruta)
+def cargar_modelo(ruta: str = None):
+    # Si no nos pasan una ruta, calculamos la absoluta automáticamente
+    if ruta is None:
+        # Esto sube un nivel desde 'modelos/prediccion.py' para llegar a la raíz
+        BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        ruta = os.path.join(BASE_DIR, "modelos", "modelo_mlp.joblib")
+    
+    # Verificación extra para depurar si sigue fallando
+    if not os.path.exists(ruta):
+        raise FileNotFoundError(f"⚠️ El modelo NO existe en: {ruta}")
+        
     return joblib.load(ruta)
 
 
