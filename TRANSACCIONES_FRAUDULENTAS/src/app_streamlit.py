@@ -68,7 +68,7 @@ st.sidebar.subheader("🧭 Navegación")
 vista = st.sidebar.radio(
     "Selecciona una sección",
     ["Datos (EDA)", "Limpieza", "Entrenamiento", "Prueba"],
-    index=1
+    index=0
 )
 
 # ----------------------------
