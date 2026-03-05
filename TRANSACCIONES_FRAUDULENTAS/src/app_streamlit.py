@@ -120,8 +120,6 @@ df = None
 #     st.warning("⚠️ Carga un archivo CSV en la barra lateral para continuar.")
 #     st.stop()
 
-
-
 # Definimos la ruta usando el directorio raíz del proyecto
 ruta_predeterminada = os.path.join(ROOT_DIR, "datos", "dataset_oltp.csv")
 
@@ -135,7 +133,6 @@ elif os.path.exists(ruta_predeterminada):
 else:
     st.warning("⚠️ Carga un archivo CSV en la barra lateral para continuar.")
     st.stop()
-
 
 
 # Normalizaciones suaves (solo para visualizar)
