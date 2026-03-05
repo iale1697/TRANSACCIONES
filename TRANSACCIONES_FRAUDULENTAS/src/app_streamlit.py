@@ -96,7 +96,7 @@ st.caption("Isai Abraham Lopez Esquivel")
 # ----------------------------
 #ruta_predeterminada = "datos/dataset_oltp.csv"
 # Esto le dice a Python: "sal de 'src' y busca la carpeta 'datos'"
-ruta_predeterminada = os.path.join(ROOT_DIR, "datos", "dataset_oltp.csv")
+#ruta_predeterminada = os.path.join(ROOT_DIR, "datos", "dataset_oltp.csv")
 df = None
 
 # if uploaded is not None:
