@@ -367,6 +367,9 @@ if vista == "Limpieza":
 # ENTRENAMIENTO
 # =========================================================
 if vista == "Entrenamiento":
+    # --- Aseguramos ROOT_DIR aquí mismo para evitar el NameError ---
+    ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    
     st.subheader("Entrenamiento (Perceptrón Multicapa)")
 
     from modelos.limpieza import limpiar_dataset
